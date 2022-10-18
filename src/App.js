@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import SingleTodo from './components/SingleTodo';
+import { useState } from 'react';
 
 
 let toDos = [
@@ -11,12 +12,29 @@ let toDos = [
 
 
 function App() {
+
+  const [newToDos, setToDos] = useState("")
+  const [newTask, setNewTask] = useState("")
+
+  const handleChange = (event) =>{
+    setNewTask(event.target.value)
+  }
+
+  const addTask = () => {
+    
+    setToDos([...toDos, toDos.push({id: toDos.length+1, toDo: newTask, completed: "false"})])
+  }
+
+
   return (
+    
     <div className="App">
+      
      <h1>To Do List</h1>
+     <input onChange={handleChange}/>
+     <button onClick={addTask}>add task</button>
      <SingleTodo toDos={toDos}/>
-     <SingleTodo toDos={toDos}/>
-    {/* {toDos.map(todo => <SingleTodo toDos={toDos}/>)} */}
+   
     </div>
   );
 }
